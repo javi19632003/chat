@@ -32,8 +32,8 @@ io.on('connection',socket => {
     });
  });
 
-
+const PORT = process.env.PORT || 8080; 
 
 httpServer.listen(8080, function() {
-    console.log('Servidor corriendo en http://localhost:8080');
+    console.log(`Servidor corriendo en puerto ${PORT}`);
 })
