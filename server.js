@@ -1,39 +1,43 @@
-const express               = require("express");
+const express  = require('express');
+const hand     = require('express-handlebars')
+const router   = require('./routes.js')
 const { Server: HttpServer} = require("http");
 const { Server: IOServer}   = require("socket.io");
 
-const app                   = express();
+const app      = express()
+const PORT     = 8080;
+
 const httpServer            = new HttpServer(app);
 const io                    = new IOServer(httpServer);
 
-
-const messages = [
-    { author: "Juan", text: "¡Hola! ¿Que tal?" },
-    { author: "Pedro", text: "¡Muy bien! ¿Y vos?" },
-    { author: "Ana", text: "¡Genial!" }
- ];
+app.engine('handlebars', hand.engine());
+app.set('view engine','handlebars');
+app.set('views','./views');
 
 
-app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+//app.use('/', express.static(__dirname + "/public"));
 
+app.use('/api', router)
 
-/*io.on('connection', function(socket) {
-    console.log('Un cliente se ha conectado');
-    socket.emit('messages', messages);
-});*/
+app.get('/', (req, res) => {
+    res.render('datos', { mensaje: "",
+                          datoPie: ""
+        });
+  });
+
+app.listen(PORT, () =>{ 
+    console.log(`Servidor Http escuchando en el puerto ${PORT}`)
+})
+
 
 io.on('connection',socket => {
-    console.log('Un cliente se ha conectado');
-    socket.emit('messages', messages);
+  console.log('Un cliente se ha conectado');
+  socket.emit('messages', messages);
 
-    socket.on('new-message',data => {
-        messages.push(data);
-        io.sockets.emit('messages', messages);
-    });
- });
-
-const PORT = process.env.PORT || 8080; 
-
-httpServer.listen(8080, function() {
-    console.log(`Servidor corriendo en puerto ${PORT}`);
-})
+  socket.on('new-message',data => {
+      messages.push(data);
+      io.sockets.emit('messages', messages);
+  });
+});
