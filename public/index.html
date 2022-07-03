@@ -8,13 +8,16 @@
     
 </head>
 <body>
-    <h1>My App chat</h1>
-    <div id="messages"></div>
+    <h1>PRDODUCTOS</h1>
     <form onsubmit="return addMessage(this)">
-        <input type="text" id="username" placeholder="Tu Nombre" >
-        <input type="text" id="texto" placeholder="Cuéntanos algo...">
+        <input type="text" id="title" placeholder="Producto:" >
+        <input type="number" id="price" placeholder="Precio:">
+        <input type="text" id="thumbail" placeholder="Foto:">
         <input type="submit" value="Enviar">
     </form>
+
+    <div id="messages"></div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="main.js"></script>
 </body>
