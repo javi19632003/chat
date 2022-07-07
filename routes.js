@@ -37,7 +37,7 @@ router.get('/productosEjs', function (req, res) {
 router.post('/productos/', function (req, res) {
   let resultado  = c1.save(req.body)
     if(resultado !== null){
-        res.status(201).send(resultado);
+        res.status(201).redirect('/')
   } else {
         res.status(400).send({error: 'el producto no pudo darse de alta'})
     }

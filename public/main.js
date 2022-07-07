@@ -1,3 +1,6 @@
+const ClasProd        = require('./clases.js');
+const c1              = new ClasProd('productos.json');
+
 const socket = io.connect();
 socket.on('messages', data => {
     console.log("on de main");
