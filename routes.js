@@ -6,35 +6,22 @@
 const express = require('express');
 const { Router } = express; 
 const ClasProd = require('./clasprod.js');
-const c1         = new ClasProd();
+const c1         = new ClasProd('productos.json');
 const router = Router();
 
 
-router.get('/productosHand', function (req, res) {
-  let resultado = c1.getAll();
-  if (!resultado){
-    res.render('productos', resultado);    
+router.get('/productos', async function (req, res) {
+  let resultado = await c1.getAll();
+  if (resultado){
+    res.status(200).send(resultado);    
 }else {
-    res.render('productos', '');    
+    res.send('');    
 }
-});
-
-router.get('/productosPug', function (req, res) {
-  let resultado = c1.getAll();
-  res.render('productosPug', {
-    productos : resultado,
-    "mensaje": "Productos"
-  });   
-});
-
-router.get('/productosEjs', function (req, res) {
-  let resultado = c1.getAll();
-  res.render('ejs/productosEjs', {productos : resultado, mensaje: "Productos"}); 
 });
 
 
 // damos de alta un nuevo producto
-router.post('/productos/', function (req, res) {
+router.post('/productos', function (req, res) {
   let resultado  = c1.save(req.body)
     if(resultado !== null){
         res.status(201).redirect('/')
@@ -43,6 +30,7 @@ router.post('/productos/', function (req, res) {
     }
  
  });
+ 
 // mostramos un producto según su id
 router.get('/productos/:id', function (req, res) {
   let resultado = c1.getById(Number(req.params.id));
