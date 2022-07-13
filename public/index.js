@@ -1,21 +1,21 @@
-const socket = io();
+const socket          = io();
 
-const btnChat = document.querySelector('#btnChat');
+const btnChat         = document.querySelector('#btnChat');
 const formularioProdu = document.querySelector('#produForm');
 
+const form            = document.querySelector('#produForm');
+const btnForm         = document.querySelector('#btnForm');
+
 btnChat.addEventListener('click', () => {
-  const chatCorreo = document.querySelector("#chatCorreo");
-  const chatMensaje = document.querySelector("#chatMensaje");
+  const chatCorreo   = document.querySelector("#chatCorreo");
+  const chatMensaje  = document.querySelector("#chatMensaje");
   socket.emit('mensaje', {'correo': chatCorreo.value, 'texto': chatMensaje.value});
 });
 
-let form = document.querySelector('#produForm');
-let btnForm = document.querySelector('#btnGuardar');
-
 btnForm.addEventListener('click', () =>{
-    let title = document.getElementById('title').value;
-    let price = document.getElementById('price').value;
-    let thumbail = document.getElementById('thumbail').value;
+    let title        = document.getElementById('title').value;
+    let price        = document.getElementById('price').value;
+    let thumbail     = document.getElementById('thumbail').value;
       fetch('/api/productos', {
           method: 'POST',
           headers: {
