@@ -13,9 +13,9 @@ const io                    = new IOServer(httpServer);
 let mensajes  =[];
 let productos =[];
 
-app.engine('handlebars', hand.engine());
-app.set('view engine','handlebars');
-app.set('views','views');
+//app.engine('handlebars', hand.engine());
+app.set('view engine','ejs');
+//app.set('views','views');
 
 
 
