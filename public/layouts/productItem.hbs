@@ -1,35 +1,22 @@
 {{#if all}}
-  <div class="list__header card">
-    <div class="product__list--name product__list--item">
-      <p>Nombre</p>
-    </div>
-    <div class="product__list--price product__list--item">
-      <p>Precio</p>
-    </div>
-    <div class="product__list--image product__list--item">
-      <p>Imagen</p>
-    </div>
-  </div>
-
-  <div class="list__body">
-    <div class="list__body--container">
-      {{#each all}}
-        <div class="list__body--row">
-          <div class="list__body--item list__body--item-name">
-            <p>{{this.title}}</p>
-          </div>
-          <div class="list__body--item list__body--item-price">
-            <p>{{this.price}}</p>
-          </div>
-          <div class="list__body--item list__body--item-photo">
-            <img src="{{this.thumbnail}}" alt="{{this.title}}" />
-          </div>
-        </div>
-      {{/each}}
-    </div>
-  </div>
+ <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Imagen</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{#each all}}
+  <tr>
+      <td>{{this.title}}</td>
+      <td>{{this.price}}</td>
+      <td><img src="{{this.thumbnail}}" alt="{{this.title}}" /></td>
+  </tr>
+    {{/each}}
 {{else}}
-  <div class="notfund">
-    <h4>No hay productos para mostrar</h4>
-  </div>
+  <tr>
+    <td><h4>No hay productos para mostrar</h4></td>
+  </tr>
 {{/if}}
+</tbody>
