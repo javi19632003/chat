@@ -1,7 +1,10 @@
-const Controller = require("../clases/products");
-const productsDB = new Controller("products");
+const Controller = require("../clases/productsDB");
+const conexion   = require('../conexiones/mysql');
+const productsDB = new Controller(conexion,"products");
+//const knexMisql  = require('knex')(coneMisql);
 
 const productsController = {
+
   getAllProducts: async (req, res) => {
     try {
       const all = await productsDB.getAllProducts();

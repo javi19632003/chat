@@ -1,7 +1,7 @@
 const fs = require("fs");
 class Products {
   constructor(name) {
-    this.name = name;
+    this.name     = name;
   }
 
   async getAllProducts() {

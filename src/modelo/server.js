@@ -3,8 +3,10 @@ const cors = require("cors");
 
 const { Server: HttpServer } = require("http");
 const { Server: IOServer } = require("socket.io");
-const productsController = require("../controladores/ControladorProdcutos");
+
+const productsController = require("../controladores/ControladorProductos");
 const messagesController = require("../controladores/controladorMensajes");
+
 
 class Server {
   constructor() {

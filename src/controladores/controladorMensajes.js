@@ -1,10 +1,13 @@
-const Controller = require("../clases/products");
-const messagesDB = new Controller("messages");
+const Controller = require("../clases/productsDB");
+const coneLite  = require('../conexiones/sqlite')
+//const knexLite  = require('knex')(coneLite)
+//console.log(coneLite)
+const messagesDB = new Controller(coneLite, "mensa");
 
 const messagesController = {
   getAllMessages: async () => {
     try {
-      const allMessages = await messagesDB.getAllProducts();
+     const allMessages = await messagesDB.getAllProducts();
       return allMessages;
     } catch (error) {
       console.log(`ERROR: ${error}`);
